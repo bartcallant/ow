@@ -104,6 +104,18 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
+	Test if a number is a multiple of a specified number.
+
+	@param x Value to match a multiple of.
+	*/
+	multipleOf(x: number) {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be a multiple of ${x}, got ${value}`,
+			validator: value => value % x === 0
+		});
+	}
+
+	/**
 	Test a number to be an integer.
 	*/
 	get integer() {

@@ -152,6 +152,24 @@ test('number.oneOf', t => {
 	}, 'Expected number to be one of `[5,6,7,8,9,11,12,13,14,15,…+3 more]`, got 10');
 });
 
+test('number.multipleOf', t => {
+	t.notThrows(() => {
+		ow(8, ow.number.multipleOf(4));
+	});
+
+	t.notThrows(() => {
+		ow(-4, ow.number.multipleOf(4));
+	});
+
+	t.throws(() => {
+		ow(3, ow.number.multipleOf(4));
+	}, 'Expected number to be a multiple of 4, got 3');
+
+	t.throws(() => {
+		ow(-2, ow.number.multipleOf(4));
+	}, 'Expected number to be a multiple of 4, got -2');
+});
+
 test('number.integer', t => {
 	t.notThrows(() => {
 		ow(10, ow.number.integer);
