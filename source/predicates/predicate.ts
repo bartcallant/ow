@@ -26,6 +26,7 @@ export interface Validator<T> {
 */
 export interface PredicateOptions {
 	optional?: boolean;
+	nullable?: boolean;
 }
 
 /**
@@ -88,6 +89,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	[testSymbol](value: T, main: Main, label: string | Function): asserts value {
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
+				continue;
+			}
+			if (this.options.nullable === true && value === null) {
 				continue;
 			}
 

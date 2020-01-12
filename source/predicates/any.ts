@@ -25,6 +25,9 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 				if (value === undefined && this.options.optional === true) {
 					return;
 				}
+				if (value === null && this.options.nullable === true) {
+					return;
+				}
 
 				errors.push(`- ${error.message}`);
 			}
